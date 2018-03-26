@@ -7,20 +7,19 @@ package codequiz;
 
 import java.io.File;
 import java.sql.*;
-/**
- *
- * @author mariu
- */
+
 public class DBConnect {
     
     private static String url = "jdbc:sqlite:E:\\SQLite\\Questions.db";
     private File db = new File(url);
-    private Connection c = null;
+    private static Connection c = null;
+    private static DBConnect instance = null;
     private Statement st;
     public int length;
     public String tableName = "Questions";
     
-    public DBConnect() throws SQLException {
+    
+    private DBConnect() throws SQLException {
         
         if( c == null ){
             
@@ -33,8 +32,7 @@ public class DBConnect {
             c.close();
             return;
             
-        }
-        
+        } 
     }
     
     public void openTable(String tableName) throws SQLException {
@@ -44,8 +42,7 @@ public class DBConnect {
                        " Question text NOT NULL, \n " + 
                        " Answer text NOT NULL)";
         
-        st.execute(query);
-        
+        st.execute(query);   
     }
     
     public void executeQuery(String command, String q, String a) throws SQLException {
@@ -77,4 +74,13 @@ public class DBConnect {
     public void endConnection() throws SQLException {
         c.close();
     }
+    
+    public static DBConnect instance() throws SQLException {
+        if(instance == null){
+            instance = new DBConnect();
+        }
+        
+        return instance;
+    }
+    
 }

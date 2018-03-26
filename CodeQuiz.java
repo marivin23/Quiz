@@ -14,12 +14,12 @@ public class CodeQuiz {
 
     /**
      * @param args the command line arguments
+     * @throws java.sql.SQLException
      */
     public static void main(String[] args) throws SQLException {
         // TODO code application logic here
         
-        DBConnect connection = new DBConnect();
-        UI window = new UI(connection);
+        UI window = new UI();
         
     }
     

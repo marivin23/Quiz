@@ -20,11 +20,13 @@ public class AddNewQuestion extends javax.swing.JFrame {
     /**
      * Creates new form AddNewQuestion
      */
-    public AddNewQuestion(DBConnect connection) {
-        db = connection;
+    public AddNewQuestion() throws SQLException {
+        
+        db = DBConnect.instance();
         initComponents();
         setVisible(true);
         setLocationRelativeTo(null);
+    
     }
 
     /**

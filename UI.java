@@ -25,9 +25,9 @@ public class UI extends JFrame implements ActionListener {
     private JPanel text, buttons;
     private final DBConnect db;
     
-    public UI(DBConnect connection) {
+    public UI() throws SQLException {
         
-        db = connection;
+        db = DBConnect.instance();
         question = new JLabel("<html>Press new question!<br></html>", SwingConstants.CENTER);
         
         answer = new JTextField();
@@ -81,13 +81,13 @@ public class UI extends JFrame implements ActionListener {
         try {
             if (e.getSource() == newQuestion) {
 
-                NewQuestionOutput q = new NewQuestionOutput(db);
+                NewQuestionOutput q = new NewQuestionOutput();
                 question.setText(q.data());
 
             } else if (e.getSource() == submit) {
 
                 String a = answer.getText().toUpperCase();
-                NewQuestionOutput q = new NewQuestionOutput(db);
+                NewQuestionOutput q = new NewQuestionOutput();
 
                 String dbAnswer = q.data(q.index);
 
@@ -100,7 +100,7 @@ public class UI extends JFrame implements ActionListener {
 
             } else if (e.getSource() == addNew) {
 
-                AddNewQuestion newQuestion = new AddNewQuestion(db);
+                AddNewQuestion newQuestion = new AddNewQuestion();
 
             }
         } catch (SQLException er) { }

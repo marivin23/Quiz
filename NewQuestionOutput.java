@@ -18,8 +18,8 @@ public class NewQuestionOutput {
     public ResultSet result;
     public static int index;
     
-    public NewQuestionOutput(DBConnect connection) {
-        db = connection;
+    public NewQuestionOutput() throws SQLException {
+        db = DBConnect.instance();
     }
 
     public String data() throws SQLException {
